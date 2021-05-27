@@ -42,7 +42,7 @@ public class CategoryRepositoryImp implements CategoryRepository{
 		
 		return listCategories;
 	}
-
+	
 	@Override
 	public List<Category> findAllActive() {
 		// TODO Auto-generated method stub
@@ -83,12 +83,14 @@ public class CategoryRepositoryImp implements CategoryRepository{
 		
 		
 		Session session = entityManagerFactory.createEntityManager().unwrap(Session.class);
+		Transaction txn = session.beginTransaction();
 		String hql = "update Category set status=false where id=:id";
 		
 		Query query = session.createQuery(hql); 
 		query.setParameter("id", id);
 		
 		query.executeUpdate();  
+		txn.commit();
 	}
 
 	@Override
@@ -103,12 +105,23 @@ public class CategoryRepositoryImp implements CategoryRepository{
 		query.setParameter("n", category.getName());
 		query.setParameter("i", category.getId());
 		
-		System.out.println("DAO:");
-		System.out.println(query.getParameterValue("n"));
-		System.out.println(query.getParameterValue("i"));
+		
 		
 		query.executeUpdate();
 		txn.commit();
+	}
+
+	@Override
+	public List<Category> findByNameLike(String name) {
+		// TODO Auto-generated method stub
+		Session session = entityManagerFactory.createEntityManager().unwrap(Session.class);
+		String hql = "from Category where name like '%:name%' order by status desc";
+		
+		Query query = session.createQuery(hql);
+		query.setParameter("name", name);
+		List<Category> listCategories = query.getResultList();
+		
+		return listCategories;
 	}
 	
 	

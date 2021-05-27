@@ -53,6 +53,11 @@ public class CategoryServicesImp implements CategoryServices{
 		// TODO Auto-generated method stub
 		categoryRepository.update(category);
 	}
+
+	@Override
+	public List<Category> findByNameLike(String name) {
+		return categoryRepository.findByNameLike(name);
+	}
 	
 	
 }

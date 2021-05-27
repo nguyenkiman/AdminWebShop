@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import AdminWebShop.Models.Category;
 import AdminWebShop.Models.Order;
@@ -30,11 +31,22 @@ public class CategoryController {
 	
 	
 	@GetMapping("")
-	public String listAll(ModelMap modelMap) {
-		List<Category> list = services.findAll();
+	public String listAll(ModelMap modelMap,@RequestParam(defaultValue = "",name = "searchstring") String searchstring) {
+		List<Category> list;
+//		if(searchstring.equals("")) {
+//			list = services.findByNameLike(searchstring);
+//		}else {
+			list = services.findAll();
+//		}
+		Category category = new Category();
+		modelMap.addAttribute("searchstring",searchstring);
 		modelMap.addAttribute("listCategories", list);
+		modelMap.addAttribute("category", category);
 		return "Category/index";
 	}
+	
+	
+	
 	@GetMapping("/Edit/{id}")
 	public String edit(ModelMap modelMap,@PathVariable(name="id") Integer id) {
 		
@@ -49,10 +61,19 @@ public class CategoryController {
 	}
 	@PostMapping("/Edit")
 	public String edit(ModelMap modelMap,Category category) {
-		System.out.println(category.getId());
-		System.out.println(category.getName());
+		
 		services.update(category);
 		modelMap.addAttribute("category", category);
+		return "redirect:/Category";
+	}
+	@GetMapping("Delete/{id}")
+	public String delete(@PathVariable(name="id") Integer id) {
+		services.deleteById(id);
+		return "redirect:/Category";
+	}
+	@PostMapping("/Create")
+	public String create(Category category) {
+		services.insert(category);
 		return "redirect:/Category";
 	}
 }

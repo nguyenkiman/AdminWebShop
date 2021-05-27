@@ -17,6 +17,8 @@ public interface CategoryRepository {
 	
 	public List<Category> findAllActive();
 	
+	public List<Category> findByNameLike(String name);
+	
 	public Category findById(int id);
 	
 	public void save(Category category);

@@ -24,13 +24,14 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h1>Categories List</h1>
-						<div class="input-group custom-search-form col-6">
-							<input type="text" class="form-control" placeholder="Search...">
-							<span class="input-group-btn">
-								<button class="btn btn-primary" type="button">
-									<i class="fa fa-search"></i>
-								</button>
-							</span>
+						<div>
+						<form th:action="@{/Category/Create}" method="POST" th:object="${category}">
+							<div class="form-group">
+								<label>Category Name</label>
+								<input th:field="*{name}" placeholder="Category Name" class="form-control">
+							</div>
+							<input type="submit" value="Create" class="btn btn-primary"/>
+						</div>
 						</div>
 					</div>
 

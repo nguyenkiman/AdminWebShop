@@ -14,6 +14,8 @@ public interface CategoryServices {
 	
 	public List<Category> findAllActive();
 	
+	public List<Category> findByNameLike(String name);
+	
 	public Category findById(int id);
 	
 	public void insert(Category category);
