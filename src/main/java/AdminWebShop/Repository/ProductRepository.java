@@ -4,21 +4,15 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import AdminWebShop.Models.Category;
 import AdminWebShop.Models.Product;
 
 @Transactional
 @Repository
-public interface ProductRepository {
-
-	public List<Product> findAll();
+public interface ProductRepository extends CrudRepository<Product, Integer>{
 	
-	public List<Product> findAllActive();
-	
-	public Product findById(int id);
-	
-	public void save(Product product);
-	
-	public void deleteById(int id);
+//	List<Product> findByNameLike(String name);
 }

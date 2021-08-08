@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Nationalized;
+
 
 @Entity
 @Table(name = "Products")
@@ -23,6 +25,7 @@ public class Product {
 	private int id;
 	
 	@Column(name = "proname",length = 100)
+	@Nationalized
 	private String proname;
 	
 	@Column(name = "urlimage",length = 255)

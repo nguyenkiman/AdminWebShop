@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Nationalized;
+
 @Entity
 @Table(name = "Customer")
 public class Customer {
@@ -20,15 +22,17 @@ public class Customer {
 	private int id;
 	
 	@Column(name = "custname",length = 100,nullable = false)
+	@Nationalized
 	private String custname;
 	
-	@Column(name = "account",length = 100,nullable = false)
+	@Column(name = "account",length = 100)
 	private String account;
 	
-	@Column(name = "passwords",length = 100,nullable = false)
+	@Column(name = "passwords",length = 100)
 	private String passwords;
 	
 	@Column(name = "address",length = 100,nullable = false)
+	@Nationalized
 	private String address;
 	
 	@Column(name = "tellno",length = 11,nullable = false)

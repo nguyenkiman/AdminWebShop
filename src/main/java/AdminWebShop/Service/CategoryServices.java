@@ -22,5 +22,7 @@ public interface CategoryServices {
 	
 	public void update(Category category);
 	
-	public void deleteById(int id);
+	public void disableById(int id);
+	
+	public void enableById(int id);
 }

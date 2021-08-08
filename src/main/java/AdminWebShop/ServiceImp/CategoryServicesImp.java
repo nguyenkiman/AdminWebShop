@@ -36,9 +36,9 @@ public class CategoryServicesImp implements CategoryServices{
 	}
 
 	@Override
-	public void deleteById(int id) {
+	public void disableById(int id) {
 		// TODO Auto-generated method stub
-		categoryRepository.deleteById(id);
+		categoryRepository.disableById(id);
 	}
 
 	@Override
@@ -57,6 +57,12 @@ public class CategoryServicesImp implements CategoryServices{
 	@Override
 	public List<Category> findByNameLike(String name) {
 		return categoryRepository.findByNameLike(name);
+	}
+
+	@Override
+	public void enableById(int id) {
+		// TODO Auto-generated method stub
+		categoryRepository.enableById(id);
 	}
 	
 	

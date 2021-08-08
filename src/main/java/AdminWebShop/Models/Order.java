@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Nationalized;
+
 @Entity
 @Table(name = "Orders")
 public class Order {
@@ -27,12 +29,14 @@ public class Order {
 	private Customer customer;
 	
 	@Column(name = "receiver",length = 100,nullable = false)
+	@Nationalized
 	private String receiver;
 	
 	@Column(name = "orderdate",nullable = false)
 	private Date orderdate;
 	
 	@Column(name = "address",length = 100,nullable = false)
+	@Nationalized
 	private String address;
 	
 	@Column(name = "totalmoney")

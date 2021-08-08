@@ -2,6 +2,7 @@ package AdminWebShop.Controller;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -52,6 +53,9 @@ public class CategoryController {
 		
 		try {
 			Category category = services.findById(id);
+			if(Objects.isNull(category)) {
+				return "404error";
+			}
 			modelMap.addAttribute("category", category);
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -66,9 +70,14 @@ public class CategoryController {
 		modelMap.addAttribute("category", category);
 		return "redirect:/Category";
 	}
-	@GetMapping("Delete/{id}")
-	public String delete(@PathVariable(name="id") Integer id) {
-		services.deleteById(id);
+	@GetMapping("Enable/{id}")
+	public String Enable(@PathVariable(name="id") Integer id) {
+		services.enableById(id);
+		return "redirect:/Category";
+	}
+	@GetMapping("Disable/{id}")
+	public String Disable(@PathVariable(name="id") Integer id) {
+		services.disableById(id);
 		return "redirect:/Category";
 	}
 	@PostMapping("/Create")

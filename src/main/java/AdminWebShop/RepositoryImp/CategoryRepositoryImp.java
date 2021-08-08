@@ -58,15 +58,20 @@ public class CategoryRepositoryImp implements CategoryRepository{
 	@Override
 	public Category findById(int id) {
 		// TODO Auto-generated method stub
-		Session session = entityManagerFactory.createEntityManager().unwrap(Session.class);
-		String hql = "from Category where id=:id";
-		
-		Query query = session.createQuery(hql); 
-		query.setParameter("id", id);
-		
-		Category category =  (Category) query.getSingleResult();
-		
-		return category;
+		try {
+			Session session = entityManagerFactory.createEntityManager().unwrap(Session.class);
+			String hql = "from Category where id=:id";
+			
+			Query query = session.createQuery(hql); 
+			query.setParameter("id", id);
+			
+			Category category =  (Category) query.getSingleResult();
+			
+			return category;
+		}catch(Exception e){
+			
+		}
+		return null;
 	}
 
 	@Override
@@ -78,13 +83,29 @@ public class CategoryRepositoryImp implements CategoryRepository{
 	}
 
 	@Override
-	public void deleteById(int id) {
+	public void disableById(int id) {
 		// TODO Auto-generated method stub
 		
 		
 		Session session = entityManagerFactory.createEntityManager().unwrap(Session.class);
 		Transaction txn = session.beginTransaction();
 		String hql = "update Category set status=false where id=:id";
+		
+		Query query = session.createQuery(hql); 
+		query.setParameter("id", id);
+		
+		query.executeUpdate();  
+		txn.commit();
+	}
+	
+	@Override
+	public void enableById(int id) {
+		// TODO Auto-generated method stub
+		
+		
+		Session session = entityManagerFactory.createEntityManager().unwrap(Session.class);
+		Transaction txn = session.beginTransaction();
+		String hql = "update Category set status=true where id=:id";
 		
 		Query query = session.createQuery(hql); 
 		query.setParameter("id", id);

@@ -2,6 +2,8 @@ package AdminWebShop.Models;
 
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Nationalized;
+
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -21,6 +23,7 @@ public class Category {
 	private int id;
 	
 	@Column(name = "catename",length = 100,nullable = false)
+	@Nationalized
 	private String catename;
 	
 	@Column(name = "status",nullable = false)

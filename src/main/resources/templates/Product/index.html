@@ -3,7 +3,7 @@
 	layout:decorate="~{layout/admin.html}">
 
 <head>
-	<title>Category Management</title>
+	<title>Product Management</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,47 +13,46 @@
 	<div layout:fragment="content">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Category Management</h1>
+				<h1 class="page-header">Product Management</h1>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h1>Categories List</h1>
-						
-						<div>
-						<form th:action="@{/Category/Create}" method="POST" th:object="${category}">
-							<div class="form-group">
-								<label>Category Name</label>
-								<input th:field="*{name}" placeholder="Category Name" class="form-control">
-							</div>
-							<input type="submit" value="Create" class="btn btn-primary"/></form>
-						</div>
+							<h1>Product List</h1>
+							
 						</div>
 					</div>
-
+					<div class="panel-heading">
+						<a href="Product/Create" class="btn btn-primary">Add new product</a>
+					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
 							<table class="table table-striped table-bordered table-hover">
 								<thead>
 									<tr>
 										<th>Id</th>
-										<th>CategoryName</th>
+										<th>Product Name</th>
+										<th>Category Name</th>
+										<th>UnitPrice</th>
 										<th>Status</th>
+										<th>Hình ảnh</th>
 										<th ></th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="item : ${listCategories}">
+									<tr th:each="item : ${listProducts}">
 										<td th:text="${item.id}"></td>
 										<td th:text="${item.name}"></td>
+										<td th:text="${item.category.name}"></td>
+										<td th:text="${#numbers.formatDecimal(item.unitprice, 0, 'COMMA', 0, 'POINT')}+' VNĐ'"></td>
 										<td th:text="${item.status} ? 'Active' : 'Disable'"></td>
+										<td class="text-center"><img alt="" th:src= "${item.urlimage}" style="border: 1px solid #ddd; border-radius: 5px; padding: 5px; width: 150px;"/> </td>
 										<td>
-											<a th:href="@{'Category/Edit/' + ${item.id}}"
-													class="btn btn-default form-group">Edit</a>
-											<a th:if="${item.status}" th:href="@{'Category/Disable/' + ${item.id}}" class="btn btn-default form-group">Disable</a>
-											<a th:if="!${item.status}" th:href="@{'Category/Enable/' + ${item.id}}" class="btn btn-default form-group">Enable</a>
+											<a th:href="@{'Product/Edit/' + ${item.id}}" class="btn btn-default form-group">Edit</a>
+											<a th:if="${item.status}" th:href="@{'Product/Disable/' + ${item.id}}" class="btn btn-default form-group">Disable</a>
+											<a th:if="!${item.status}" th:href="@{'Product/Enable/' + ${item.id}}" class="btn btn-default form-group">Enable</a>
 										</td>
 									</tr>
 								</tbody>

@@ -23,7 +23,9 @@ public interface CategoryRepository {
 	
 	public void save(Category category);
 	
-	public void deleteById(int id);
+	public void disableById(int id);
+	
+	public void enableById(int id);
 	
 	public void update(Category category);
 	
